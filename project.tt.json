@@ -1,0 +1,13 @@
+{
+  "miniprogramRoot": "./",
+  "projectname": "sdu-anni",
+  "description": "百廿山大之团橘奇遇记",
+  "appid": "touristappid",
+  "setting": {
+    "urlCheck": true,
+    "es6": false,
+    "postcss": false,
+    "minified": false
+  },
+  "compileType": "miniprogram"
+}
