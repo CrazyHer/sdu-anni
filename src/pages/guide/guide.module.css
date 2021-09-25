@@ -1,0 +1,38 @@
+.body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.img {
+  height: 680px;
+}
+.title {
+  color: rgb(205, 55, 55);
+  font-size: large;
+  font-weight: bold;
+}
+.rulesContent {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: column;
+  width: 480px;
+  flex-wrap: wrap;
+  background-color: rgb(251, 251, 251);
+  padding: 30px 50px 30px 50px;
+  border-radius: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  margin: 28px;
+}
+.btnGroup {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.btn {
+  color: rgb(205, 55, 55);
+  margin: 20px;
+  border-radius: 50px;
+  width: 233px;
+}
