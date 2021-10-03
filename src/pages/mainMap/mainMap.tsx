@@ -20,7 +20,7 @@ const MainMap = (props: any) => {
           Taro.navigateTo({ url: "/pages/mainMap/weihai/weihai" });
         }}
       >
-        威海
+        威海3
       </AtButton>
       <AtButton
         onClick={() => {

@@ -25,6 +25,9 @@
   border: 1px solid rgba(0, 0, 0, 0.05);
   margin: 28px;
 }
+.rulesContent > Text {
+  color: #a13f3f;
+}
 .btnGroup {
   display: flex;
   justify-content: center;

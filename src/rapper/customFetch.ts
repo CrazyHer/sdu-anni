@@ -2,7 +2,7 @@ import Taro from "@tarojs/taro";
 
 import { overrideFetch } from ".";
 
-const baseURL = "";
+const baseURL = "https://gengzhaosui.top:7002";
 
 // 使用Taro.request重写请求方法
 const customFetch = (token: string) => {

@@ -7,7 +7,7 @@
   align-items: center;
   justify-content: space-around;
   flex-wrap: wrap;
-  background-image: url("../../assets/indexBg.jpg");
+  background-image: url("https://static.herui.club/assets/sduanni/indexBg.jpg");
   background-size: cover;
 }
 .img {
@@ -27,6 +27,7 @@
 }
 .intro > Text {
   margin: 8px;
+  color: #a13f3f;
 }
 
 .btnGroup {

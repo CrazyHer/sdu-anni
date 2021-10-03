@@ -1,4 +1,4 @@
-/* md5: 2a40befe1071eb07305e1209b9387c57 */
+/* md5: e3c9a90622d9b708b8f61c856eb3d1f5 */
 /* Rap仓库id: 290408 */
 /* Rapper版本: 1.2.2 */
 /* eslint-disable */
@@ -14,71 +14,105 @@ import * as commonLib from 'rap/runtime/commonLib'
 
 export interface IModels {
   /**
-   * 接口名：示例接口
+   * 接口名：wx.login
    * Rap 地址: http://rap2.taobao.org/repository/editor?id=290408&mod=477008&itf=2077406
    */
-  'GET/example/1631181749141': {
+  'POST/login': {
     Req: {
       /**
-       * 请求属性示例
+       * wx.login res返回code
        */
-      foo?: string
+      code: string
     }
     Res: {
-      /**
-       * 字符串属性示例
-       */
-      string: string
-      /**
-       * 数字属性示例
-       */
-      number: number
-      /**
-       * 布尔属性示例
-       */
-      boolean: boolean
-      /**
-       * 正则属性示例
-       */
-      regexp: string
-      /**
-       * 函数属性示例
-       */
-      function: string
-      /**
-       * 数组属性示例
-       */
-      array: {
-        /**
-         * 数组元素示例
-         */
-        foo: number
-        /**
-         * 数组元素示例
-         */
-        bar: string
-      }[]
-      /**
-       * 自定义数组元素示例
-       */
-      items: any[]
-      /**
-       * 对象属性示例
-       */
-      object: {
-        /**
-         * 对象属性示例
-         */
-        foo: number
-        /**
-         * 对象属性示例
-         */
-        bar: string
+      success: boolean
+      data: {
+        token: string
       }
+      errorCode: string
+      errorMsg: string
+    }
+  }
+
+  /**
+   * 接口名：完善用户信息（推迟）
+   * Rap 地址: http://rap2.taobao.org/repository/editor?id=290408&mod=477008&itf=2097135
+   */
+  'POST/updateUserInfo': {
+    Req: {
+      token: string
       /**
-       * 占位符示例
+       * wx名称
        */
-      placeholder: string
+      nick_name: string
+      /**
+       * 学号
+       */
+      stu_id: string
+    }
+    Res: {
+      success: boolean
+      data: {}
+      errorCode: string
+      errorMsg: string
+    }
+  }
+
+  /**
+   * 接口名：保存用户的进度
+   * Rap 地址: http://rap2.taobao.org/repository/editor?id=290408&mod=477008&itf=2093424
+   */
+  'POST/saveProgress': {
+    Req: {
+      /**
+       * 令牌
+       */
+      token: string
+      /**
+       * 是否参与抽奖
+       */
+      draw: boolean
+      questions: {
+        question_id: number
+        question_status: boolean
+      }[]
+    }
+    Res: {
+      success: boolean
+      data: {}
+      errorCode: string
+      errorMsg: string
+    }
+  }
+
+  /**
+   * 接口名：获取用户的进度
+   * Rap 地址: http://rap2.taobao.org/repository/editor?id=290408&mod=477008&itf=2093425
+   */
+  'POST/getProgress': {
+    Req: {
+      /**
+       * 令牌
+       */
+      token: string
+    }
+    Res: {
+      success: boolean
+      errorCode: string
+      errorMsg: string
+      data: {
+        draw: boolean
+        questions: {
+          question_id: number
+          question_name: string
+          question_option: {
+            option: string
+          }[]
+          question_campus: string
+          question_answer: string
+          question_status: boolean
+        }[]
+      }
     }
   }
 }
@@ -86,7 +120,10 @@ export interface IModels {
 type ResSelector<T> = T
 
 export interface IResponseTypes {
-  'GET/example/1631181749141': ResSelector<IModels['GET/example/1631181749141']['Res']>
+  'POST/login': ResSelector<IModels['POST/login']['Res']>
+  'POST/updateUserInfo': ResSelector<IModels['POST/updateUserInfo']['Res']>
+  'POST/saveProgress': ResSelector<IModels['POST/saveProgress']['Res']>
+  'POST/getProgress': ResSelector<IModels['POST/getProgress']['Res']>
 }
 
 export function createFetch(fetchConfig: commonLib.RequesterOption, extraConfig?: {fetchType?: commonLib.FetchType}) {
@@ -97,18 +134,63 @@ export function createFetch(fetchConfig: commonLib.RequesterOption, extraConfig?
 
   return {
     /**
-     * 接口名：示例接口
+     * 接口名：wx.login
      * Rap 地址: http://rap2.taobao.org/repository/editor?id=290408&mod=477008&itf=2077406
      * @param req 请求参数
      * @param extra 请求配置项
      */
-    'GET/example/1631181749141': (req?: IModels['GET/example/1631181749141']['Req'], extra?: commonLib.IExtra) => {
+    'POST/login': (req?: IModels['POST/login']['Req'], extra?: commonLib.IExtra) => {
       return rapperFetch({
-        url: '/example/1631181749141',
-        method: 'GET',
+        url: '/login',
+        method: 'POST',
         params: req,
         extra,
-      }) as Promise<IResponseTypes['GET/example/1631181749141']>
+      }) as Promise<IResponseTypes['POST/login']>
+    },
+
+    /**
+     * 接口名：完善用户信息（推迟）
+     * Rap 地址: http://rap2.taobao.org/repository/editor?id=290408&mod=477008&itf=2097135
+     * @param req 请求参数
+     * @param extra 请求配置项
+     */
+    'POST/updateUserInfo': (req?: IModels['POST/updateUserInfo']['Req'], extra?: commonLib.IExtra) => {
+      return rapperFetch({
+        url: '/updateUserInfo',
+        method: 'POST',
+        params: req,
+        extra,
+      }) as Promise<IResponseTypes['POST/updateUserInfo']>
+    },
+
+    /**
+     * 接口名：保存用户的进度
+     * Rap 地址: http://rap2.taobao.org/repository/editor?id=290408&mod=477008&itf=2093424
+     * @param req 请求参数
+     * @param extra 请求配置项
+     */
+    'POST/saveProgress': (req?: IModels['POST/saveProgress']['Req'], extra?: commonLib.IExtra) => {
+      return rapperFetch({
+        url: '/saveProgress',
+        method: 'POST',
+        params: req,
+        extra,
+      }) as Promise<IResponseTypes['POST/saveProgress']>
+    },
+
+    /**
+     * 接口名：获取用户的进度
+     * Rap 地址: http://rap2.taobao.org/repository/editor?id=290408&mod=477008&itf=2093425
+     * @param req 请求参数
+     * @param extra 请求配置项
+     */
+    'POST/getProgress': (req?: IModels['POST/getProgress']['Req'], extra?: commonLib.IExtra) => {
+      return rapperFetch({
+        url: '/getProgress',
+        method: 'POST',
+        params: req,
+        extra,
+      }) as Promise<IResponseTypes['POST/getProgress']>
     },
   }
 }
