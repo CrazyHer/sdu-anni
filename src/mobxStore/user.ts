@@ -31,7 +31,10 @@ export default class User {
   );
 
   // 获取完成的校区数量
-  @computed get finishedCampusNum(): number {
+  @computed get finishedCampusNum(): {
+    campus: string;
+    value: number;
+  }[] {
     const finishedQuestionNum: Record<string, number> = {};
     this.questionRawList.forEach(v => {
       // 记录每个校区完成题目的数量
@@ -43,8 +46,8 @@ export default class User {
     });
     // 每个校区答满3道题则记为完成
     return Object.keys(finishedQuestionNum)
-      .map(key => finishedQuestionNum[key])
-      .filter(v => v === 3).length;
+      .map(key => ({ campus: key, value: finishedQuestionNum[key] }))
+      .filter(v => v.value === 3);
   }
 
   @action setUserInfo = (userInfo: Taro.UserInfo) => {

@@ -1,14 +1,18 @@
 import { View, Text } from "@tarojs/components";
 import { inject, observer } from "mobx-react";
 import { FC } from "react";
-import { AtButton } from "taro-ui";
 import Style from "./baotuquan.module.css";
+import QuestionSheet from "../../../../components/questionSheet/questionSheet";
 
 const Baotuquan: FC = (props: any) => {
   return (
     <View className={Style.body}>
-      <Text>趵突泉答题</Text>
-      <AtButton>提交题目</AtButton>
+      <QuestionSheet
+        questions={props.user.getQuestionsByCampus("趵突泉校区")}
+        onFinish={async v => {
+          console.log(v);
+        }}
+      />
     </View>
   );
 };

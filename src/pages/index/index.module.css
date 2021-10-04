@@ -5,13 +5,11 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-around;
+  justify-content: flex-end;
   flex-wrap: wrap;
-  background-image: url("https://static.herui.club/assets/sduanni/indexBg.jpg");
+  background-image: url("https://static.herui.club/assets/sduanni/mainBackground.png");
   background-size: cover;
-}
-.img {
-  width: 560px;
+  background-position: center;
 }
 .intro {
   display: flex;
@@ -31,6 +29,7 @@
 }
 
 .btnGroup {
+  margin-top: 100px;
   margin-bottom: 50px;
 }
 
@@ -39,5 +38,5 @@
   color: white;
   border-radius: 50px;
   width: 233px;
-  background-color: rgb(28, 80, 182);
+  background-color: #a13f3f;
 }

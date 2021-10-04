@@ -13,6 +13,8 @@ export default {
     "pages/mainMap/jinan/zhongxin/zhongxin",
     "pages/mainMap/qingdao/qingdao",
     "pages/mainMap/weihai/weihai",
+    "pages/mainMap/qingdao/questionQingdao/questionQingdao",
+    "pages/mainMap/weihai/questionWeihai/questionWeihai",
     "pages/shareCard/shareCard"
   ],
   window: {

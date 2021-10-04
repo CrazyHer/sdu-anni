@@ -1,3 +1,3 @@
 export default {
-  navigationBarTitleText: "威海校区"
+  navigationBarTitleText: "威海"
 };

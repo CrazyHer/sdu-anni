@@ -1,14 +1,18 @@
 import { View, Text } from "@tarojs/components";
 import { inject, observer } from "mobx-react";
 import { FC } from "react";
-import { AtButton } from "taro-ui";
+import QuestionSheet from "../../../../components/questionSheet/questionSheet";
 import Style from "./ruanjianyuan.module.css";
 
 const Ruanjianyuan: FC = (props: any) => {
   return (
     <View className={Style.body}>
-      <Text>软件园答题</Text>
-      <AtButton>提交题目</AtButton>
+      <QuestionSheet
+        questions={props.user.getQuestionsByCampus("软件园校区")}
+        onFinish={async v => {
+          console.log(v);
+        }}
+      />
     </View>
   );
 };

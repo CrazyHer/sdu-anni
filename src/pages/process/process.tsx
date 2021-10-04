@@ -7,8 +7,6 @@ import User from "../../mobxStore/user";
 import Style from "./process.module.css";
 import { fetch } from "../../rapper";
 
-const sduLogo = "https://static.herui.club/assets/sduanni/sduLogo.png";
-
 const ProcessPage: FC<{ user: User }> = props => {
   const [loading, setLoading] = useState(false);
 
@@ -39,34 +37,72 @@ const ProcessPage: FC<{ user: User }> = props => {
     Taro.navigateTo({ url: "/pages/mainMap/mainMap" });
   };
 
+  // 根据该校区完成情况显示不同状态
+  const CampusCard = (p: { campus: string; url: string }) => (
+    <View>
+      {props.user.finishedCampusNum.find(v => v.campus === p.campus) ? (
+        <Image className={Style.card} mode="aspectFit" src={p.url} />
+      ) : (
+        <Image
+          className={Style.card}
+          mode="aspectFit"
+          src={p.url.replace(/.png/g, "_gray.png")}
+        />
+      )}
+    </View>
+  );
+
   return (
     <View className={Style.body}>
-      <Image className={Style.img} src={sduLogo} mode="aspectFit" />
       <Text className={Style.title}>收集进度</Text>
       <View className={Style.campusCardGroup}>
         <View className={Style.row}>
-          <View className={Style.card}> </View>
-          <View className={Style.card}> </View>
-          <View className={Style.card}> </View>
-          <View className={Style.card}> </View>
+          <CampusCard
+            url="https://static.herui.club/assets/sduanni/zhongxin_logo.png"
+            campus="中心校区"
+          />
+          <CampusCard
+            url="https://static.herui.club/assets/sduanni/ruanjianyuan_logo.png"
+            campus="软件园校区"
+          />
+          <CampusCard
+            url="https://static.herui.club/assets/sduanni/baotuquan_logo.png"
+            campus="趵突泉校区"
+          />
+          <CampusCard
+            url="https://static.herui.club/assets/sduanni/hongjialou_logo.png"
+            campus="洪家楼校区"
+          />
         </View>
         <View className={Style.row}>
-          <View className={Style.card}> </View>
-          <View className={Style.card}> </View>
-          <View className={Style.card}> </View>
-          <View className={Style.card}> </View>
+          <CampusCard
+            url="https://static.herui.club/assets/sduanni/qianfoshan_logo.png"
+            campus="千佛山校区"
+          />
+          <CampusCard
+            url="https://static.herui.club/assets/sduanni/xinglongshan_logo.png"
+            campus="兴隆山校区"
+          />
+          <CampusCard
+            url="https://static.herui.club/assets/sduanni/qingdao_logo.png"
+            campus="青岛校区"
+          />
+          <CampusCard
+            url="https://static.herui.club/assets/sduanni/weihai_logo.png"
+            campus="威海校区"
+          />
         </View>
       </View>
 
       <View className={Style.processText}>
         <Text>{props.user.userInfo?.nickName}：</Text>
         <Text>
-          您已点亮{props.user.finishedCampusNum}个校区，还差
-          {8 - props.user.finishedCampusNum}张即可分享卡片并参与抽奖
+          您已点亮{props.user.finishedCampusNum.length}个校区，还差
+          {8 - props.user.finishedCampusNum.length}张即可分享卡片并参与抽奖
         </Text>
       </View>
 
-      {props.user.finishedCampusNum === 8 ? (
+      {props.user.finishedCampusNum.length === 8 ? (
         <View className={Style.btnGroup}>
           <AtButton className={Style.btn} onClick={onShareCard} circle>
             分享卡片

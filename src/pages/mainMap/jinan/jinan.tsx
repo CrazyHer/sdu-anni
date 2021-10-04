@@ -1,4 +1,4 @@
-import { View, Text } from "@tarojs/components";
+import { View, Text, Image } from "@tarojs/components";
 import { inject, observer } from "mobx-react";
 import { FC } from "react";
 import { AtButton } from "taro-ui";
@@ -9,56 +9,67 @@ const Jinan: FC = (props: any) => {
   return (
     <View className={Style.body}>
       <Text>济南地图</Text>
-      <AtButton
+      <Image
+        mode="aspectFit"
+        src="https://static.herui.club/assets/sduanni/shandong_baotuquan.png"
+        className={`${Style.btn} ${Style.baotuquan}`}
         onClick={() => {
           Taro.navigateTo({ url: "/pages/mainMap/jinan/baotuquan/baotuquan" });
         }}
-      >
-        趵突泉
-      </AtButton>
-      <AtButton
+      />
+
+      <Image
+        mode="aspectFit"
+        src="https://static.herui.club/assets/sduanni/shandong_hongjialou.png"
+        className={`${Style.btn} ${Style.hongjialou}`}
         onClick={() => {
           Taro.navigateTo({
             url: "/pages/mainMap/jinan/hongjialou/hongjialou"
           });
         }}
-      >
-        洪家楼
-      </AtButton>
-      <AtButton
+      />
+
+      <Image
+        mode="aspectFit"
+        src="https://static.herui.club/assets/sduanni/shandong_qianfoshan.png"
+        className={`${Style.btn} ${Style.qianfoshan}`}
         onClick={() => {
           Taro.navigateTo({
             url: "/pages/mainMap/jinan/qianfoshan/qianfoshan"
           });
         }}
-      >
-        千佛山
-      </AtButton>
-      <AtButton
+      />
+
+      <Image
+        mode="aspectFit"
+        src="https://static.herui.club/assets/sduanni/shandong_ruanjianyuan.png"
+        className={`${Style.btn} ${Style.ruanjianyuan}`}
         onClick={() => {
           Taro.navigateTo({
             url: "/pages/mainMap/jinan/ruanjianyuan/ruanjianyuan"
           });
         }}
-      >
-        软件园
-      </AtButton>
-      <AtButton
+      />
+
+      <Image
+        mode="aspectFit"
+        src="https://static.herui.club/assets/sduanni/shandong_xinglongshan.png"
+        className={`${Style.btn} ${Style.xinglongshan}`}
         onClick={() => {
           Taro.navigateTo({
             url: "/pages/mainMap/jinan/xinglongshan/xinglongshan"
           });
         }}
-      >
-        兴隆山
-      </AtButton>
-      <AtButton
+      />
+
+      <Image
+        mode="aspectFit"
+        src="https://static.herui.club/assets/sduanni/shandong_zhongxin.png"
+        className={`${Style.btn} ${Style.zhongxin}`}
         onClick={() => {
           Taro.navigateTo({ url: "/pages/mainMap/jinan/zhongxin/zhongxin" });
         }}
-      >
-        中心
-      </AtButton>
+      />
     </View>
   );
 };

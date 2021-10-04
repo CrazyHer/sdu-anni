@@ -1,15 +1,16 @@
 .body {
   position: absolute;
   height: 100%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: flex-end;
+  background-image: url("https://static.herui.club/assets/sduanni/mainBackgroundWithMask.png");
+  background-size: cover;
+  background-position: 50% 10%;
 }
-.img {
-  margin: -50px;
-  width: 560px;
-}
+
 .title {
   font-size: x-large;
 }
@@ -26,30 +27,33 @@
   justify-content: center;
   flex-wrap: wrap;
 }
-.row > .card {
-  width: 100px;
-  height: 100px;
+.row .card {
+  width: 120px;
+  height: 120px;
   border: solid 1px;
-  border-radius: 100px;
-  margin: 23px 30px 23px 30px;
+  border-radius: 120px;
+  margin: 22px 25px 22px 25px;
 }
 .processText {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
-  margin: 0 50px 50px 50px;
+  margin: 0 50px 0px 50px;
   padding: 30px;
   border-radius: 28px;
   border: 1px solid rgba(0, 0, 0, 0.05);
-  background-color: rgb(244, 244, 244);
 }
 
 .btnGroup {
   display: flex;
   align-items: center;
   justify-content: center;
+  margin: 0 20px 0 20px;
 }
 .btn {
   width: 250px;
+  margin: 50px;
+  background-color: #a13f3f;
+  color: white;
 }

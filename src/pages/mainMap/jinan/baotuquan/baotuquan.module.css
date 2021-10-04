@@ -1,0 +1,9 @@
+.body {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  background-image: url("https://static.herui.club/assets/sduanni/dati_baotuquan.png");
+  background-size: cover;
+  background-position: center;
+}

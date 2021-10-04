@@ -7,8 +7,6 @@ import { fetch } from "../../rapper/index";
 import Style from "./index.module.css";
 import User from "../../mobxStore/user";
 
-const sduLogo = "https://static.herui.club/assets/sduanni/sduLogo.png";
-
 const Index: FC<{ user: User }> = props => {
   const [loading, setLoading] = useState(false);
   const navigateTo = () => {
@@ -48,13 +46,17 @@ const Index: FC<{ user: User }> = props => {
 
   return (
     <View className={Style.body}>
-      <View>
-        <Image src={sduLogo} mode="aspectFit" />
-      </View>
       <View className={Style.intro}>
-        <Text>学无止境，气有浩然</Text>
-        <Text>正值120山大校庆之际</Text>
-        <Text>让我们共游山大，同学校史！</Text>
+        <Text>庆百廿，游山大，学校史！</Text>
+        <Text>依山傍海的旖旎风光，</Text>
+        <Text>朴实深厚的学习氛围，</Text>
+        <Text>山大在你心中是怎样的呢？</Text>
+        <Text>在山大百廿校庆之际，</Text>
+        <Text>团橘与你一起，</Text>
+        <Text>“云上”打卡山大，</Text>
+        <Text>学习山大校史，收集校区徽章，</Text>
+        <Text>抽取精美礼品！</Text>
+        <Text>快点击“现在出发”，参与活动吧！</Text>
       </View>
       <View className={Style.btnGroup}>
         <AtButton

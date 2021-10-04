@@ -1,15 +1,18 @@
-import { View, Text } from "@tarojs/components";
-import { inject, observer } from "mobx-react";
+import Taro from "@tarojs/taro";
+import { View } from "@tarojs/components";
 import { FC } from "react";
-import { AtButton } from "taro-ui";
 import Style from "./qingdao.module.css";
 
-const Qingdao: FC = (props: any) => {
+const Qingdao: FC = props => {
   return (
-    <View className={Style.body}>
-      <Text>青岛答题</Text>
-      <AtButton>提交题目</AtButton>
-    </View>
+    <View
+      className={Style.body}
+      onClick={() => {
+        Taro.navigateTo({
+          url: "/pages/mainMap/qingdao/questionQingdao/questionQingdao"
+        });
+      }}
+    />
   );
 };
-export default inject()(observer(Qingdao));
+export default Qingdao;
