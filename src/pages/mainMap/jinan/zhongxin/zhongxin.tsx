@@ -1,14 +1,15 @@
 import { View, Text } from "@tarojs/components";
 import { inject, observer } from "mobx-react";
 import { FC } from "react";
+import User from "../../../../mobxStore/user";
 import QuestionSheet from "../../../../components/questionSheet/questionSheet";
 import Style from "./zhongxin.module.css";
 
-const Zhongxin: FC = (props: any) => {
+const Zhongxin: FC<{ user: User }> = props => {
   return (
     <View className={Style.body}>
       <QuestionSheet
-        questions={props.user.getQuestionsByCampus("中心")}
+        questions={props.user.getQuestionsByCampus("中心校区")}
         onFinish={async v => {
           console.log(v);
         }}
@@ -16,4 +17,4 @@ const Zhongxin: FC = (props: any) => {
     </View>
   );
 };
-export default inject()(observer(Zhongxin));
+export default inject("user")(observer(Zhongxin));

@@ -11,41 +11,41 @@
 }
 /* 以洪家楼校区为基准计算各校区相对位置 */
 .baotuquan {
-  top: calc(50% - 160px - 30px);
-  left: calc(50% - 280px);
+  top: calc(50% - 180px - 30px);
+  left: calc(50% - 310px);
   width: 250px;
   height: 250px;
 }
 .hongjialou {
-  top: calc(50% - 160px);
+  top: calc(50% - 180px);
   left: calc(50%);
   width: 200px;
   height: 200px;
 }
 
 .qianfoshan {
-  top: calc(50% - 160px + 100px);
+  top: calc(50% - 180px + 130px);
   left: calc(50% + 180px);
   width: 210px;
   height: 210px;
 }
 
 .ruanjianyuan {
-  top: calc(50% - 160px - 190px);
+  top: calc(50% - 180px - 230px);
   left: calc(50% + 150px);
   width: 233px;
   height: 233px;
 }
 
 .xinglongshan {
-  top: calc(50% - 130px - 310px);
+  top: calc(50% - 180px - 330px);
   left: calc(50% + 20px - 100px);
   width: 230px;
   height: 230px;
 }
 
 .zhongxin {
-  top: calc(50% - 130px + 190px);
+  top: calc(50% - 180px + 250px);
   left: calc(50% + 20px - 180px);
   width: 280px;
   height: 280px;

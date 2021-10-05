@@ -5,6 +5,7 @@ import { AtButton } from "taro-ui";
 import { FC, useEffect } from "react";
 import User from "../../mobxStore/user";
 import Style from "./guide.module.css";
+import GoBackButton from "../../components/goBackButton/goBackButton";
 
 const anniLogo = "https://static.herui.club/assets/sduanni/anniLogo.jpg";
 
@@ -19,6 +20,7 @@ const Guide: FC<{ user: User }> = props => {
 
   return (
     <View className={Style.body}>
+      <GoBackButton />
       <View>
         <Image className={Style.img} src={anniLogo} mode="aspectFit" />
       </View>

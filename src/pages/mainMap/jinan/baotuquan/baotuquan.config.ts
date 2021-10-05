@@ -1,3 +1,4 @@
 export default {
-  navigationBarTitleText: "趵突泉校区"
+  navigationBarTitleText: "趵突泉校区",
+  navigationStyle: "default"
 };

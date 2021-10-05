@@ -6,6 +6,7 @@ import { FC, useEffect, useMemo, useState } from "react";
 import User from "../../mobxStore/user";
 import Style from "./process.module.css";
 import { fetch } from "../../rapper";
+import GoBackButton from "../../components/goBackButton/goBackButton";
 
 const ProcessPage: FC<{ user: User }> = props => {
   const [loading, setLoading] = useState(false);
@@ -54,6 +55,7 @@ const ProcessPage: FC<{ user: User }> = props => {
 
   return (
     <View className={Style.body}>
+      <GoBackButton />
       <Text className={Style.title}>收集进度</Text>
       <View className={Style.campusCardGroup}>
         <View className={Style.row}>

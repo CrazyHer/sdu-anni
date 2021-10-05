@@ -1,12 +1,13 @@
 import { View, Text, Image } from "@tarojs/components";
 import { inject, observer } from "mobx-react";
-import { AtButton } from "taro-ui";
 import Taro from "@tarojs/taro";
 import Style from "./mainMap.module.css";
+import GoBackButton from "../../components/goBackButton/goBackButton";
 
 const MainMap = (props: any) => {
   return (
     <View className={Style.body}>
+      <GoBackButton />
       <Image
         mode="aspectFit"
         src="https://static.herui.club/assets/sduanni/jinan_icon.png"

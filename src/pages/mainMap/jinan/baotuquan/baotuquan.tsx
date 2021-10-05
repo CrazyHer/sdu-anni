@@ -3,8 +3,9 @@ import { inject, observer } from "mobx-react";
 import { FC } from "react";
 import Style from "./baotuquan.module.css";
 import QuestionSheet from "../../../../components/questionSheet/questionSheet";
+import User from "../../../../mobxStore/user";
 
-const Baotuquan: FC = (props: any) => {
+const Baotuquan: FC<{ user: User }> = props => {
   return (
     <View className={Style.body}>
       <QuestionSheet
@@ -16,4 +17,4 @@ const Baotuquan: FC = (props: any) => {
     </View>
   );
 };
-export default inject()(observer(Baotuquan));
+export default inject("user")(observer(Baotuquan));

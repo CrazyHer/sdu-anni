@@ -1,10 +1,11 @@
 import { View, Text } from "@tarojs/components";
 import { inject, observer } from "mobx-react";
 import { FC } from "react";
+import User from "../../../../mobxStore/user";
 import QuestionSheet from "../../../../components/questionSheet/questionSheet";
 import Style from "./qianfoshan.module.css";
 
-const Qianfoshan: FC = (props: any) => {
+const Qianfoshan: FC<{ user: User }> = props => {
   return (
     <View className={Style.body}>
       <QuestionSheet
@@ -16,4 +17,4 @@ const Qianfoshan: FC = (props: any) => {
     </View>
   );
 };
-export default inject()(observer(Qianfoshan));
+export default inject("user")(observer(Qianfoshan));

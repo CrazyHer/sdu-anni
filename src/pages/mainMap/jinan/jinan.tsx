@@ -1,14 +1,14 @@
 import { View, Text, Image } from "@tarojs/components";
 import { inject, observer } from "mobx-react";
 import { FC } from "react";
-import { AtButton } from "taro-ui";
 import Taro from "@tarojs/taro";
 import Style from "./jinan.module.css";
+import GoBackButton from "../../../components/goBackButton/goBackButton";
 
 const Jinan: FC = (props: any) => {
   return (
     <View className={Style.body}>
-      <Text>济南地图</Text>
+      <GoBackButton />
       <Image
         mode="aspectFit"
         src="https://static.herui.club/assets/sduanni/shandong_baotuquan.png"

@@ -5,6 +5,7 @@ export default {
     "pages/mainMap/mainMap",
     "pages/process/process",
     "pages/mainMap/jinan/jinan",
+
     "pages/mainMap/jinan/baotuquan/baotuquan",
     "pages/mainMap/jinan/hongjialou/hongjialou",
     "pages/mainMap/jinan/qianfoshan/qianfoshan",
@@ -19,6 +20,7 @@ export default {
   ],
   window: {
     backgroundTextStyle: "light",
+    navigationStyle: "custom",
     navigationBarBackgroundColor: "#fff",
     navigationBarTitleText: "WeChat",
     navigationBarTextStyle: "black"
