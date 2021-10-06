@@ -1,6 +1,36 @@
+.content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 30px;
+}
+.questionPanel {
+  background-color: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(8px);
+  border-radius: 28px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  padding: 30px 50px 30px 50px;
+}
+.questionPanel > .title {
+  font-size: larger;
+}
+.options .btn {
+  margin: 50px;
+}
 .right {
-  background-color: green;
+  transition: all 0.5s;
+  background-color: #c8e39c;
 }
 .wrong {
-  background-color: red;
+  transition: all 0.5s;
+  background-color: #f08d90;
+}
+.nextBtnWrapper {
+  height: 50px;
+}
+.nextBtn {
+  margin: 30px;
+  color: white;
+  background-color: #a13f3f;
 }

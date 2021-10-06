@@ -1,8 +1,8 @@
-import { View, Text, Button } from "@tarojs/components";
+import { View, Text } from "@tarojs/components";
 import { FC, useEffect, useState } from "react";
 import Taro from "@tarojs/taro";
 import { Models } from "src/rapper";
-import { AtButton, AtMessage, AtModal, AtToast } from "taro-ui";
+import { AtButton, AtToast } from "taro-ui";
 import Style from "./questionSheet.module.css";
 
 const QuestionSheet: FC<{
@@ -27,11 +27,7 @@ const QuestionSheet: FC<{
 
   useEffect(() => {
     // 题目已答完
-    if (
-      !props.questions[currentQuestionIndex] ||
-      props.questions.length ===
-        props.questions.filter(sv => sv.question_status).length
-    ) {
+    if (!props.questions[currentQuestionIndex]) {
       setFinished(true);
       setOptionStatus({
         option: "",
@@ -54,9 +50,12 @@ const QuestionSheet: FC<{
       });
       setShowNext(false);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentQuestionIndex]);
 
-  const handleNext = () => {
+  const handleNext = async () => {
+    // 回答正确，调用回调函数
+    await props.onFinish(props.questions[currentQuestionIndex].question_id);
     setCurrentQuestionIndex(currentQuestionIndex + 1);
   };
 
@@ -65,58 +64,71 @@ const QuestionSheet: FC<{
       <AtToast
         isOpened={isFinished}
         status="success"
-        onClick={() => Taro.redirectTo({ url: "/pages/process/process" })}
+        onClick={() => Taro.navigateBack()}
         text={`恭喜你完成答题
        可点击返回主页`}
       />
-      <Text>{props.questions[currentQuestionIndex]?.question_name}</Text>
-      <View className={Style.options}>
-        {props.questions[currentQuestionIndex]?.question_option.map(v => (
-          <AtButton
-            key={v.option}
-            // 由题目回答状态设定相应样式
-            className={`${Style.btn} ${
-              optionStatus.option === v.option
-                ? optionStatus.status === "right"
-                  ? Style.right
-                  : optionStatus.status === "wrong"
-                  ? Style.wrong
+
+      <View
+        className={Style.questionPanel}
+        style={{
+          // 答题结束时，隐藏答题板
+          display: props.questions[currentQuestionIndex] ? "unset" : "none"
+        }}
+      >
+        <Text className={Style.title}>
+          {props.questions[currentQuestionIndex]?.question_name}
+        </Text>
+        <View className={Style.options}>
+          {props.questions[currentQuestionIndex]?.question_option.map(v => (
+            <AtButton
+              circle
+              key={v.option}
+              // 由题目回答状态设定相应样式
+              className={`${Style.btn} ${
+                optionStatus.option === v.option
+                  ? optionStatus.status === "right"
+                    ? Style.right
+                    : optionStatus.status === "wrong"
+                    ? Style.wrong
+                    : ""
                   : ""
-                : ""
-            } `}
-            onClick={async () => {
-              // 若该题已回答正确，则不响应点击事件
-              if (optionStatus.status === "right") {
-                return;
-              }
-              if (
-                v.option ===
-                props.questions[currentQuestionIndex].question_answer
-              ) {
-                // 回答正确，调用回调函数
-                props.onFinish(
-                  props.questions[currentQuestionIndex].question_id
-                );
-                // 将选项设置为正确状态并展示下一题按钮
-                setOptionStatus({
-                  option: props.questions[currentQuestionIndex].question_answer,
-                  status: "right"
-                });
-                setShowNext(true);
-              } else {
-                // 回答错误
-                // 将该选项设置为错误状态
-                setOptionStatus({ option: v.option, status: "wrong" });
-                setShowNext(false);
-              }
-            }}
-          >
-            {v.option}
-          </AtButton>
-        ))}
+              } `}
+              onClick={async () => {
+                // 若该题已回答正确，则不响应点击事件
+                if (optionStatus.status === "right") {
+                  return;
+                }
+                if (
+                  v.option ===
+                  props.questions[currentQuestionIndex].question_answer
+                ) {
+                  // 将选项设置为正确状态并展示按钮
+                  setOptionStatus({
+                    option:
+                      props.questions[currentQuestionIndex].question_answer,
+                    status: "right"
+                  });
+                  setShowNext(true);
+                } else {
+                  // 回答错误
+                  // 将该选项设置为错误状态
+                  setOptionStatus({ option: v.option, status: "wrong" });
+                  setShowNext(false);
+                }
+              }}
+            >
+              {v.option}
+            </AtButton>
+          ))}
+        </View>
       </View>
-      <View>
-        {showNext && <AtButton onClick={handleNext}>下一道题</AtButton>}
+      <View className={Style.nextBtnWrapper}>
+        {showNext && (
+          <AtButton className={Style.nextBtn} onClick={handleNext} circle>
+            下一题
+          </AtButton>
+        )}
       </View>
     </View>
   );

@@ -1,13 +1,15 @@
 import { View, Image, Text } from "@tarojs/components";
 import { observer, inject } from "mobx-react";
 import { AtButton, AtToast } from "taro-ui";
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import Taro from "@tarojs/taro";
 import { fetch } from "../../rapper/index";
 import Style from "./index.module.css";
 import User from "../../mobxStore/user";
+import Images from "../../mobxStore/images";
+import PreloadImg from "../../components/preloadImg/preloadImg";
 
-const Index: FC<{ user: User }> = props => {
+const Index: FC<{ user: User; images: Images }> = props => {
   const [loading, setLoading] = useState(false);
   const navigateTo = () => {
     if (props.user.guildConfirm) {
@@ -44,8 +46,37 @@ const Index: FC<{ user: User }> = props => {
     }
   };
 
+  const [preloadProgress, setPreloadProgress] = useState(0);
+  const [preloading, setPreloading] = useState(false);
+
+  useEffect(() => {
+    setPreloading(true);
+    setTimeout(() => {
+      setPreloading(false);
+    }, 8000);
+  }, []);
+
   return (
-    <View className={Style.body}>
+    <View
+      className={Style.body}
+      style={{ backgroundImage: `url(${props.images.imgsrcs.mainBackground})` }}
+    >
+      {preloading && (
+        <PreloadImg
+          onLoadFinish={() => setPreloading(false)}
+          onProgressChange={p => setPreloadProgress(p)}
+          imgSrcs={Object.keys(props.images.imgsrcs).map(
+            v => props.images.imgsrcs[v]
+          )}
+        />
+      )}
+      <AtToast
+        isOpened={preloading}
+        duration={0}
+        status="loading"
+        text={`正在加载资源:${(preloadProgress * 100).toFixed(2)}%`}
+        hasMask
+      />
       <View className={Style.intro}>
         <Text>庆百廿，游山大，学校史！</Text>
         <Text>依山傍海的旖旎风光，</Text>
@@ -72,4 +103,4 @@ const Index: FC<{ user: User }> = props => {
   );
 };
 
-export default inject("user")(observer(Index));
+export default inject("user", "images")(observer(Index));

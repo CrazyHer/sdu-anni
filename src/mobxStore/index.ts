@@ -1,11 +1,11 @@
 import { configure } from "mobx";
-import Counter from "./counter";
+import Images from "./images";
 import User from "./user";
 
 configure({ enforceActions: "observed" });
 
 const user = new User();
-const counter = new Counter();
-const stores = { user, counter };
+const images = new Images();
+const stores = { user, images };
 
 export default stores;

@@ -1,4 +1,4 @@
-/* md5: e3c9a90622d9b708b8f61c856eb3d1f5 */
+/* md5: 4f925a7c29b659473792b55ed83bb15f */
 /* Rap仓库id: 290408 */
 /* Rapper版本: 1.2.2 */
 /* eslint-disable */
@@ -64,10 +64,6 @@ export interface IModels {
    */
   'POST/saveProgress': {
     Req: {
-      /**
-       * 令牌
-       */
-      token: string
       /**
        * 是否参与抽奖
        */

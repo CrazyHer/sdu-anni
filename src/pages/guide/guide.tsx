@@ -4,12 +4,11 @@ import Taro from "@tarojs/taro";
 import { AtButton } from "taro-ui";
 import { FC, useEffect } from "react";
 import User from "../../mobxStore/user";
-import Style from "./guide.module.css";
 import GoBackButton from "../../components/goBackButton/goBackButton";
+import Style from "./guide.module.css";
+import Images from "../../mobxStore/images";
 
-const anniLogo = "https://static.herui.club/assets/sduanni/anniLogo.jpg";
-
-const Guide: FC<{ user: User }> = props => {
+const Guide: FC<{ user: User; images: Images }> = props => {
   const onConfirm = () => {
     Taro.redirectTo({ url: "/pages/process/process" });
   };
@@ -22,7 +21,11 @@ const Guide: FC<{ user: User }> = props => {
     <View className={Style.body}>
       <GoBackButton />
       <View>
-        <Image className={Style.img} src={anniLogo} mode="aspectFit" />
+        <Image
+          className={Style.img}
+          src={props.images.imgsrcs.anniLogo}
+          mode="aspectFit"
+        />
       </View>
       <Text className={Style.title}>答题规则</Text>
       <ScrollView className={Style.rulesContent} scrollY enableFlex>
@@ -48,4 +51,4 @@ const Guide: FC<{ user: User }> = props => {
     </View>
   );
 };
-export default inject("user")(observer(Guide));
+export default inject("user", "images")(observer(Guide));

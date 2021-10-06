@@ -1,14 +1,15 @@
-import { View, Text, Image, OpenData } from "@tarojs/components";
+import { View, Text, Image } from "@tarojs/components";
 import { inject, observer } from "mobx-react";
-import { AtButton, AtToast } from "taro-ui";
+import { AtActionSheet, AtActionSheetItem, AtButton, AtToast } from "taro-ui";
 import Taro from "@tarojs/taro";
-import { FC, useEffect, useMemo, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import User from "../../mobxStore/user";
+import GoBackButton from "../../components/goBackButton/goBackButton";
 import Style from "./process.module.css";
 import { fetch } from "../../rapper";
-import GoBackButton from "../../components/goBackButton/goBackButton";
+import Images from "../../mobxStore/images";
 
-const ProcessPage: FC<{ user: User }> = props => {
+const ProcessPage: FC<{ user: User; images: Images }> = props => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -31,16 +32,20 @@ const ProcessPage: FC<{ user: User }> = props => {
   const onClickGo = () => {
     Taro.navigateTo({ url: "/pages/mainMap/mainMap" });
   };
+
+  const [campusSelectVisible, setCampusSelectVisible] = useState(false);
+
   const onShareCard = () => {
-    Taro.navigateTo({ url: "/pages/shareCard/shareCard" });
+    setCampusSelectVisible(true);
   };
+
   const onRestart = () => {
     Taro.navigateTo({ url: "/pages/mainMap/mainMap" });
   };
 
   // 根据该校区完成情况显示不同状态
-  const CampusCard = (p: { campus: string; url: string }) => (
-    <View>
+  const CampusCard = (p: { campus: string; url: string; path: string }) => (
+    <View onClick={() => Taro.navigateTo({ url: p.path })}>
       {props.user.finishedCampusNum.find(v => v.campus === p.campus) ? (
         <Image className={Style.card} mode="aspectFit" src={p.url} />
       ) : (
@@ -54,43 +59,56 @@ const ProcessPage: FC<{ user: User }> = props => {
   );
 
   return (
-    <View className={Style.body}>
+    <View
+      className={Style.body}
+      style={{
+        backgroundImage: `url(${props.images.imgsrcs.mainBackgroundWithMask})`
+      }}
+    >
       <GoBackButton />
       <Text className={Style.title}>收集进度</Text>
       <View className={Style.campusCardGroup}>
         <View className={Style.row}>
           <CampusCard
-            url="https://static.herui.club/assets/sduanni/zhongxin_logo.png"
+            path="/pages/mainMap/jinan/zhongxin/zhongxin"
+            url={props.images.imgsrcs.zhongxin_logo}
             campus="中心校区"
           />
           <CampusCard
-            url="https://static.herui.club/assets/sduanni/ruanjianyuan_logo.png"
+            path="/pages/mainMap/jinan/ruanjianyuan/ruanjianyuan"
+            url={props.images.imgsrcs.ruanjianyuan_logo}
             campus="软件园校区"
           />
           <CampusCard
-            url="https://static.herui.club/assets/sduanni/baotuquan_logo.png"
+            path="/pages/mainMap/jinan/baotuquan/baotuquan"
+            url={props.images.imgsrcs.baotuquan_logo}
             campus="趵突泉校区"
           />
           <CampusCard
-            url="https://static.herui.club/assets/sduanni/hongjialou_logo.png"
+            path="/pages/mainMap/jinan/hongjialou/hongjialou"
+            url={props.images.imgsrcs.hongjialou_logo}
             campus="洪家楼校区"
           />
         </View>
         <View className={Style.row}>
           <CampusCard
-            url="https://static.herui.club/assets/sduanni/qianfoshan_logo.png"
+            path="/pages/mainMap/jinan/qianfoshan/qianfoshan"
+            url={props.images.imgsrcs.qianfoshan_logo}
             campus="千佛山校区"
           />
           <CampusCard
-            url="https://static.herui.club/assets/sduanni/xinglongshan_logo.png"
+            path="/pages/mainMap/jinan/xinglongshan/xinglongshan"
+            url={props.images.imgsrcs.xinglongshan_logo}
             campus="兴隆山校区"
           />
           <CampusCard
-            url="https://static.herui.club/assets/sduanni/qingdao_logo.png"
+            path="/pages/mainMap/qingdao/questionQingdao/questionQingdao"
+            url={props.images.imgsrcs.qingdao_logo}
             campus="青岛校区"
           />
           <CampusCard
-            url="https://static.herui.club/assets/sduanni/weihai_logo.png"
+            path="/pages/mainMap/weihai/questionWeihai/questionWeihai"
+            url={props.images.imgsrcs.weihai_logo}
             campus="威海校区"
           />
         </View>
@@ -121,7 +139,24 @@ const ProcessPage: FC<{ user: User }> = props => {
         </View>
       )}
       <AtToast isOpened={loading} text="加载中" status="loading" />
+
+      <AtActionSheet
+        isOpened={campusSelectVisible}
+        title="选择您要生成的校区卡片"
+        onClose={() => setCampusSelectVisible(false)}
+      >
+        <AtActionSheetItem
+          onClick={() => {
+            Taro.navigateTo({
+              url: "/pages/shareCard/shareCard?card=demo"
+            });
+            setCampusSelectVisible(false);
+          }}
+        >
+          威海校区
+        </AtActionSheetItem>
+      </AtActionSheet>
     </View>
   );
 };
-export default inject("user")(observer(ProcessPage));
+export default inject("user", "images")(observer(ProcessPage));

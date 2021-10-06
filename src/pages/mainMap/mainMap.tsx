@@ -1,40 +1,46 @@
-import { View, Text, Image } from "@tarojs/components";
+import { View, Image } from "@tarojs/components";
 import { inject, observer } from "mobx-react";
+import { FC } from "react";
 import Taro from "@tarojs/taro";
-import Style from "./mainMap.module.css";
 import GoBackButton from "../../components/goBackButton/goBackButton";
+import Style from "./mainMap.module.css";
+import User from "../../mobxStore/user";
+import Images from "../../mobxStore/images";
 
-const MainMap = (props: any) => {
+const MainMap: FC<{ user: User; images: Images }> = props => {
   return (
-    <View className={Style.body}>
+    <View
+      className={Style.body}
+      style={{ backgroundImage: `url(${props.images.imgsrcs.shandong})` }}
+    >
       <GoBackButton />
       <Image
         mode="aspectFit"
-        src="https://static.herui.club/assets/sduanni/jinan_icon.png"
+        src={props.images.imgsrcs.jinan_icon}
         className={`${Style.jinanBtn} ${Style.btn}`}
         onClick={() => {
-          Taro.navigateTo({ url: "/pages/mainMap/jinan/jinan" });
+          Taro.redirectTo({ url: "/pages/mainMap/jinan/jinan" });
         }}
       />
 
       <Image
         mode="aspectFit"
-        src="https://static.herui.club/assets/sduanni/weihai_icon.png"
+        src={props.images.imgsrcs.weihai_icon}
         className={`${Style.weihaiBtn} ${Style.btn}`}
         onClick={() => {
-          Taro.navigateTo({ url: "/pages/mainMap/weihai/weihai" });
+          Taro.redirectTo({ url: "/pages/mainMap/weihai/weihai" });
         }}
       />
 
       <Image
         mode="aspectFit"
-        src="https://static.herui.club/assets/sduanni/qingdao_icon.png"
+        src={props.images.imgsrcs.qingdao_icon}
         className={`${Style.qingdaoBtn} ${Style.btn}`}
         onClick={() => {
-          Taro.navigateTo({ url: "/pages/mainMap/qingdao/qingdao" });
+          Taro.redirectTo({ url: "/pages/mainMap/qingdao/qingdao" });
         }}
       />
     </View>
   );
 };
-export default inject()(observer(MainMap));
+export default inject("user", "images")(observer(MainMap));
