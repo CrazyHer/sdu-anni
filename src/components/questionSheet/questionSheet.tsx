@@ -1,16 +1,20 @@
 import { View, Text } from "@tarojs/components";
 import { FC, useEffect, useState } from "react";
 import Taro from "@tarojs/taro";
-import { Models } from "src/rapper";
-import { AtButton, AtToast } from "taro-ui";
+import { inject, observer } from "mobx-react";
+import { AtButton, AtModal, AtToast } from "taro-ui";
+import { fetch, Models } from "../../rapper";
 import Style from "./questionSheet.module.css";
+import User from "../../mobxStore/user";
 
 const QuestionSheet: FC<{
   className?: string;
   questions: Models["POST/getProgress"]["Res"]["data"]["questions"];
-  // 正确作答完一道题时
-  onFinish: (question_id: number) => void;
-}> = props => {
+}> = (props: {
+  className?: string;
+  questions: Models["POST/getProgress"]["Res"]["data"]["questions"];
+  user: User;
+}) => {
   // 当前作答的题目
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
 
@@ -53,10 +57,33 @@ const QuestionSheet: FC<{
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentQuestionIndex]);
 
+  const [loading, setLoading] = useState(false);
   const handleNext = async () => {
-    // 回答正确，调用回调函数
-    await props.onFinish(props.questions[currentQuestionIndex].question_id);
-    setCurrentQuestionIndex(currentQuestionIndex + 1);
+    try {
+      setLoading(true);
+      // 若题目已完成作答，不操作，否则更新题目状态
+      if (!props.questions[currentQuestionIndex]?.question_status) {
+        props.user.updateQuestionStatus(
+          props.questions[currentQuestionIndex].question_id,
+          true
+        );
+        await fetch["POST/saveProgress"]({
+          draw: false,
+          questions: props.user.questionRawList
+        });
+      }
+
+      setCurrentQuestionIndex(currentQuestionIndex + 1);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const [modalVisible, setModalVisible] = useState(false);
+  const handleCampusInfo = () => {
+    setModalVisible(true);
   };
 
   return (
@@ -67,6 +94,14 @@ const QuestionSheet: FC<{
         onClick={() => Taro.navigateBack()}
         text={`恭喜你完成答题
        可点击返回主页`}
+      />
+
+      <AtModal
+        isOpened={modalVisible}
+        content={props.questions[currentQuestionIndex]?.question_knowledge}
+        onCancel={() => setModalVisible(false)}
+        onClose={() => setModalVisible(false)}
+        cancelText="返回答题"
       />
 
       <View
@@ -125,12 +160,27 @@ const QuestionSheet: FC<{
       </View>
       <View className={Style.nextBtnWrapper}>
         {showNext && (
-          <AtButton className={Style.nextBtn} onClick={handleNext} circle>
-            下一题
+          <AtButton
+            loading={loading}
+            className={Style.nextBtn}
+            onClick={handleNext}
+            circle
+          >
+            {!loading && "下一题"}
+          </AtButton>
+        )}
+        {optionStatus.status === "wrong" && (
+          <AtButton
+            loading={loading}
+            className={Style.nextBtn}
+            onClick={handleCampusInfo}
+            circle
+          >
+            了解校史
           </AtButton>
         )}
       </View>
     </View>
   );
 };
-export default QuestionSheet;
+export default inject("user")(observer(QuestionSheet));

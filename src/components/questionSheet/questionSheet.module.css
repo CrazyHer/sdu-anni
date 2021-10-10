@@ -13,7 +13,7 @@
   padding: 30px 50px 30px 50px;
 }
 .questionPanel > .title {
-  font-size: larger;
+  font-size: large;
 }
 .options .btn {
   margin: 50px;
@@ -29,8 +29,11 @@
 .nextBtnWrapper {
   height: 50px;
 }
+
 .nextBtn {
-  margin: 30px;
+  margin: 50px;
   color: white;
-  background-color: #a13f3f;
+  border-radius: 50px;
+  width: 233px;
+  background-color: rgb(205, 55, 55);
 }

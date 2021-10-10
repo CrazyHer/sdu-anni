@@ -9,6 +9,9 @@ export default class User {
   token: string = Taro.getStorageSync("token") || "";
   guildConfirm: boolean = Taro.getStorageSync("guildConfirm") || false;
   hasDrawn: boolean = false; // 用户是否已抽奖
+  openPrize: boolean = false; // 是否开奖
+  isLucky: boolean = false; // 是否中奖
+  prizeInfo: string = ""; // 开奖文案信息
   questionRawList: Models["POST/getProgress"]["Res"]["data"]["questions"] = [];
   userInfo: Taro.UserInfo | undefined = Taro.getStorageSync("userInfo");
   constructor() {
@@ -68,6 +71,16 @@ export default class User {
 
   @action setDrawState = (hasDrawn: boolean) => {
     this.hasDrawn = hasDrawn;
+  };
+
+  @action setPrizeState = (
+    openPrize: boolean,
+    isLucky: boolean,
+    prizeInfo: string
+  ) => {
+    this.openPrize = openPrize;
+    this.isLucky = isLucky;
+    this.prizeInfo = prizeInfo;
   };
 
   @action updateQuestionStatus = (id: number, status: boolean) => {

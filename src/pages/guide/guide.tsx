@@ -1,4 +1,4 @@
-import { View, Text, Image, ScrollView } from "@tarojs/components";
+import { View, Text, Image, ScrollView, RichText } from "@tarojs/components";
 import { inject, observer } from "mobx-react";
 import Taro from "@tarojs/taro";
 import { AtButton } from "taro-ui";
@@ -29,16 +29,27 @@ const Guide: FC<{ user: User; images: Images }> = props => {
       </View>
       <Text className={Style.title}>答题规则</Text>
       <ScrollView className={Style.rulesContent} scrollY enableFlex>
-        <Text>
-          {`
-1.游校区，学校史
-进入活动界面后，你可以点击山东省地图上的济南、青岛、威海三地，在小程序中打卡山大八大校区，并点击各校区图标进入答题界面！
-2.答题目，集徽章
-在每个校区对应的答题界面中都有三道题目，其中两道与校区相关，一道为校史题目，三道题均答对便可获得一个校区徽章，并在地图上点亮该校区卡片！
-3.分享卡片，参加抽奖
-完成全部八个校区的题目，点亮八个校区，便可以在初始界面点击图标进行分享，你可以从八个校区中任选一个，生成该校区的卡片并分享给你的朋友（朋友圈，qq空间，微博等），并参加抽奖！抽奖结果会在活动后公布，兑奖时要凭借分享的截图哦。
-`}
-        </Text>
+        <View
+          style={{
+            display: "flex",
+            alignItems: "flex-start",
+            justifyContent: "center",
+            flexDirection: "column"
+          }}
+        >
+          <Text className={Style.textB}>1.云游校区，回答题目</Text>
+          <Text>
+            在进度界面点击开始答题，在山东省地图上点击济南、威海、青岛图标，即可进入相应校区答题界面！
+          </Text>
+          <Text className={Style.textB}>2.学习校史，收集徽章</Text>
+          <Text>
+            每个校区对应的答题界面中都有三道校史知识题目，三道题均答对便可点亮一个校区徽章！
+          </Text>
+          <Text className={Style.textB}>3.分享卡片，参加抽奖</Text>
+          <Text>
+            八大校区全部点亮，便可在进度界面任选一个校区，生成卡片并分享到朋友圈，即可参加抽奖！抽奖结果将在活动后推文公布，兑奖时需提供朋友圈分享截图。
+          </Text>
+        </View>
       </ScrollView>
       <View className={Style.btnGroup}>
         <AtButton className={Style.btn} onClick={onNoMoreInform}>

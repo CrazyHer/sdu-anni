@@ -14,7 +14,7 @@ const Weihai: FC<{ user: User; images: Images }> = props => {
         className={Style.body}
         style={{ backgroundImage: `url(${props.images.imgsrcs.weihaishi})` }}
         onClick={() => {
-          Taro.redirectTo({
+          Taro.navigateTo({
             url: "/pages/mainMap/weihai/questionWeihai/questionWeihai"
           });
         }}

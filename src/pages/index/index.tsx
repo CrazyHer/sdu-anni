@@ -22,7 +22,7 @@ const Index: FC<{ user: User; images: Images }> = props => {
   const getUserInfo = async () => {
     if (!props.user.userInfo) {
       const userInfoRes = await Taro.getUserProfile({
-        desc: "制作获奖卡片并记录中奖信息"
+        desc: "制作获奖卡片并记录中奖身份信息"
       });
       props.user.setUserInfo(userInfoRes.userInfo);
     }
@@ -37,6 +37,11 @@ const Index: FC<{ user: User; images: Images }> = props => {
       const res = await fetch["POST/login"]({ code: loginRes.code });
       if (res.success) {
         props.user.setToken(res.data.token);
+        props.user.setPrizeState(
+          res.data.openPrize,
+          res.data.lucky,
+          res.data.prizeInfo
+        );
         navigateTo();
       } else throw new Error(res.errorMsg);
     } catch (error) {

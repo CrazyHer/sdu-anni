@@ -19,7 +19,7 @@ const Jinan: FC<{ user: User; images: Images }> = props => {
         src={props.images.imgsrcs.shandong_baotuquan}
         className={`${Style.btn} ${Style.baotuquan}`}
         onClick={() => {
-          Taro.redirectTo({ url: "/pages/mainMap/jinan/baotuquan/baotuquan" });
+          Taro.navigateTo({ url: "/pages/mainMap/jinan/baotuquan/baotuquan" });
         }}
       />
 
@@ -28,7 +28,7 @@ const Jinan: FC<{ user: User; images: Images }> = props => {
         src={props.images.imgsrcs.shandong_hongjialou}
         className={`${Style.btn} ${Style.hongjialou}`}
         onClick={() => {
-          Taro.redirectTo({
+          Taro.navigateTo({
             url: "/pages/mainMap/jinan/hongjialou/hongjialou"
           });
         }}
@@ -39,7 +39,7 @@ const Jinan: FC<{ user: User; images: Images }> = props => {
         src={props.images.imgsrcs.shandong_qianfoshan}
         className={`${Style.btn} ${Style.qianfoshan}`}
         onClick={() => {
-          Taro.redirectTo({
+          Taro.navigateTo({
             url: "/pages/mainMap/jinan/qianfoshan/qianfoshan"
           });
         }}
@@ -50,7 +50,7 @@ const Jinan: FC<{ user: User; images: Images }> = props => {
         src={props.images.imgsrcs.shandong_ruanjianyuan}
         className={`${Style.btn} ${Style.ruanjianyuan}`}
         onClick={() => {
-          Taro.redirectTo({
+          Taro.navigateTo({
             url: "/pages/mainMap/jinan/ruanjianyuan/ruanjianyuan"
           });
         }}
@@ -61,7 +61,7 @@ const Jinan: FC<{ user: User; images: Images }> = props => {
         src={props.images.imgsrcs.shandong_xinglongshan}
         className={`${Style.btn} ${Style.xinglongshan}`}
         onClick={() => {
-          Taro.redirectTo({
+          Taro.navigateTo({
             url: "/pages/mainMap/jinan/xinglongshan/xinglongshan"
           });
         }}
@@ -72,7 +72,7 @@ const Jinan: FC<{ user: User; images: Images }> = props => {
         src={props.images.imgsrcs.shandong_zhongxin}
         className={`${Style.btn} ${Style.zhongxin}`}
         onClick={() => {
-          Taro.redirectTo({ url: "/pages/mainMap/jinan/zhongxin/zhongxin" });
+          Taro.navigateTo({ url: "/pages/mainMap/jinan/zhongxin/zhongxin" });
         }}
       />
     </View>

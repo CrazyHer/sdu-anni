@@ -12,7 +12,7 @@
 }
 .title {
   color: rgb(205, 55, 55);
-  font-size: large;
+  font-size: x-large;
   font-weight: bold;
 }
 .rulesContent {
@@ -29,17 +29,20 @@
   border: 1px solid rgba(0, 0, 0, 0.05);
   margin: 28px;
 }
-.rulesContent > Text {
-  color: #a13f3f;
+
+.rulesContent .textB {
+  font-weight: bold;
 }
+
 .btnGroup {
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
 .btn {
-  color: rgb(205, 55, 55);
   margin: 20px;
+  color: rgb(205, 55, 55);
   border-radius: 50px;
   width: 233px;
 }

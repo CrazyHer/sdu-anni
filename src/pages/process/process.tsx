@@ -1,6 +1,12 @@
 import { View, Text, Image } from "@tarojs/components";
 import { inject, observer } from "mobx-react";
-import { AtActionSheet, AtActionSheetItem, AtButton, AtToast } from "taro-ui";
+import {
+  AtActionSheet,
+  AtActionSheetItem,
+  AtButton,
+  AtModal,
+  AtToast
+} from "taro-ui";
 import Taro from "@tarojs/taro";
 import { FC, useEffect, useState } from "react";
 import User from "../../mobxStore/user";
@@ -28,6 +34,14 @@ const ProcessPage: FC<{ user: User; images: Images }> = props => {
       })
       .finally(() => setLoading(false));
   }, []);
+
+  const [modalVisible, setModalVisible] = useState(false);
+  useEffect(() => {
+    // 如果已开奖，则弹出提示框显示文案
+    if (props.user.openPrize) {
+      setModalVisible(true);
+    }
+  }, [props.user.openPrize]);
 
   const onClickGo = () => {
     Taro.navigateTo({ url: "/pages/mainMap/mainMap" });
@@ -75,9 +89,9 @@ const ProcessPage: FC<{ user: User; images: Images }> = props => {
             campus="中心校区"
           />
           <CampusCard
-            path="/pages/mainMap/jinan/ruanjianyuan/ruanjianyuan"
-            url={props.images.imgsrcs.ruanjianyuan_logo}
-            campus="软件园校区"
+            path="/pages/mainMap/jinan/hongjialou/hongjialou"
+            url={props.images.imgsrcs.hongjialou_logo}
+            campus="洪家楼校区"
           />
           <CampusCard
             path="/pages/mainMap/jinan/baotuquan/baotuquan"
@@ -85,16 +99,17 @@ const ProcessPage: FC<{ user: User; images: Images }> = props => {
             campus="趵突泉校区"
           />
           <CampusCard
-            path="/pages/mainMap/jinan/hongjialou/hongjialou"
-            url={props.images.imgsrcs.hongjialou_logo}
-            campus="洪家楼校区"
-          />
-        </View>
-        <View className={Style.row}>
-          <CampusCard
             path="/pages/mainMap/jinan/qianfoshan/qianfoshan"
             url={props.images.imgsrcs.qianfoshan_logo}
             campus="千佛山校区"
+          />
+        </View>
+
+        <View className={Style.row}>
+          <CampusCard
+            path="/pages/mainMap/jinan/ruanjianyuan/ruanjianyuan"
+            url={props.images.imgsrcs.ruanjianyuan_logo}
+            campus="软件园校区"
           />
           <CampusCard
             path="/pages/mainMap/jinan/xinglongshan/xinglongshan"
@@ -102,14 +117,14 @@ const ProcessPage: FC<{ user: User; images: Images }> = props => {
             campus="兴隆山校区"
           />
           <CampusCard
-            path="/pages/mainMap/qingdao/questionQingdao/questionQingdao"
-            url={props.images.imgsrcs.qingdao_logo}
-            campus="青岛校区"
-          />
-          <CampusCard
             path="/pages/mainMap/weihai/questionWeihai/questionWeihai"
             url={props.images.imgsrcs.weihai_logo}
             campus="威海校区"
+          />
+          <CampusCard
+            path="/pages/mainMap/qingdao/questionQingdao/questionQingdao"
+            url={props.images.imgsrcs.qingdao_logo}
+            campus="青岛校区"
           />
         </View>
       </View>
@@ -139,7 +154,13 @@ const ProcessPage: FC<{ user: User; images: Images }> = props => {
         </View>
       )}
       <AtToast isOpened={loading} text="加载中" status="loading" />
-
+      <AtModal
+        isOpened={modalVisible}
+        onClose={() => setModalVisible(false)}
+        onConfirm={() => setModalVisible(false)}
+        title="活动已开奖"
+        content={props.user.prizeInfo}
+      />
       <AtActionSheet
         isOpened={campusSelectVisible}
         title="选择您要生成的校区卡片"
@@ -148,12 +169,82 @@ const ProcessPage: FC<{ user: User; images: Images }> = props => {
         <AtActionSheetItem
           onClick={() => {
             Taro.navigateTo({
-              url: "/pages/shareCard/shareCard?card=demo"
+              url: "/pages/shareCard/shareCard?card=card_zhongxin"
+            });
+            setCampusSelectVisible(false);
+          }}
+        >
+          中心校区
+        </AtActionSheetItem>
+        <AtActionSheetItem
+          onClick={() => {
+            Taro.navigateTo({
+              url: "/pages/shareCard/shareCard?card=card_hongjialou"
+            });
+            setCampusSelectVisible(false);
+          }}
+        >
+          洪家楼校区
+        </AtActionSheetItem>
+        <AtActionSheetItem
+          onClick={() => {
+            Taro.navigateTo({
+              url: "/pages/shareCard/shareCard?card=card_baotuquan"
+            });
+            setCampusSelectVisible(false);
+          }}
+        >
+          趵突泉校区
+        </AtActionSheetItem>
+        <AtActionSheetItem
+          onClick={() => {
+            Taro.navigateTo({
+              url: "/pages/shareCard/shareCard?card=card_qianfoshan"
+            });
+            setCampusSelectVisible(false);
+          }}
+        >
+          千佛山校区
+        </AtActionSheetItem>
+        <AtActionSheetItem
+          onClick={() => {
+            Taro.navigateTo({
+              url: "/pages/shareCard/shareCard?card=card_ruanjianyuan"
+            });
+            setCampusSelectVisible(false);
+          }}
+        >
+          软件园校区
+        </AtActionSheetItem>
+        <AtActionSheetItem
+          onClick={() => {
+            Taro.navigateTo({
+              url: "/pages/shareCard/shareCard?card=card_xinglongshan"
+            });
+            setCampusSelectVisible(false);
+          }}
+        >
+          兴隆山校区
+        </AtActionSheetItem>
+        <AtActionSheetItem
+          onClick={() => {
+            Taro.navigateTo({
+              url: "/pages/shareCard/shareCard?card=card_weihai"
             });
             setCampusSelectVisible(false);
           }}
         >
           威海校区
+        </AtActionSheetItem>
+        <AtActionSheetItem
+          onClick={() => {
+            Taro.navigateTo({
+              url: "/pages/shareCard/shareCard?card=card_qingdao"
+            });
+            setCampusSelectVisible(false);
+          }}
+        >
+          青岛校区
         </AtActionSheetItem>
       </AtActionSheet>
     </View>

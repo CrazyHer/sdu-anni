@@ -5,7 +5,6 @@ import QuestionSheet from "../../../../components/questionSheet/questionSheet";
 import GoBackButton from "../../../../components/goBackButton/goBackButton";
 import Style from "./questionWeihai.module.css";
 import User from "../../../../mobxStore/user";
-import { fetch } from "../../../../rapper";
 import Images from "../../../../mobxStore/images";
 import BgTransition from "../../../../components/bgTransition/bgTransition";
 
@@ -33,16 +32,7 @@ const QuestionWeihai: FC<{ user: User; images: Images }> = props => {
       />
 
       <GoBackButton />
-      <QuestionSheet
-        questions={props.user.getQuestionsByCampus("威海校区")}
-        onFinish={async v => {
-          props.user.updateQuestionStatus(v, true);
-          await fetch["POST/saveProgress"]({
-            draw: false,
-            questions: props.user.questionRawList
-          });
-        }}
-      />
+      <QuestionSheet questions={props.user.getQuestionsByCampus("威海校区")} />
     </View>
   );
 };

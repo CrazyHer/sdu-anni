@@ -14,7 +14,7 @@ const Qingdao: FC<{ user: User; images: Images }> = props => {
         className={Style.body}
         style={{ backgroundImage: `url(${props.images.imgsrcs.qingdaoshi})` }}
         onClick={() => {
-          Taro.redirectTo({
+          Taro.navigateTo({
             url: "/pages/mainMap/qingdao/questionQingdao/questionQingdao"
           });
         }}

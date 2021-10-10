@@ -1,30 +1,40 @@
-import { View, Text } from "@tarojs/components";
+import { View } from "@tarojs/components";
 import { inject, observer } from "mobx-react";
-import { FC } from "react";
+import { FC, useState } from "react";
 import QuestionSheet from "../../../../components/questionSheet/questionSheet";
 import User from "../../../../mobxStore/user";
 import GoBackButton from "../../../../components/goBackButton/goBackButton";
 import Style from "./questionQingdao.module.css";
-import { fetch } from "../../../../rapper";
 import Images from "../../../../mobxStore/images";
+import BgTransition from "../../../../components/bgTransition/bgTransition";
 
 const QuestionQingdao: FC<{ user: User; images: Images }> = props => {
+  const [bgSrcs] = useState([
+    props.images.imgsrcs.dati_qingdao0,
+    props.images.imgsrcs.dati_qingdao1,
+    props.images.imgsrcs.dati_qingdao2,
+    props.images.imgsrcs.dati_qingdao3
+  ]);
   return (
     <View
       className={Style.body}
-      style={{ backgroundImage: `url(${props.images.imgsrcs.dati_qingdao})` }}
+      style={{
+        backgroundColor: "rgba(0,0,0,0)"
+      }}
     >
+      <BgTransition
+        bgSrcs={bgSrcs}
+        index={
+          props.user
+            .getQuestionsByCampus("青岛校区")
+            .filter(v => v.question_status).length
+        }
+      />
+
       <GoBackButton />
       <QuestionSheet
         className={Style.questionSheet}
         questions={props.user.getQuestionsByCampus("青岛校区")}
-        onFinish={async v => {
-          props.user.updateQuestionStatus(v, true);
-          await fetch["POST/saveProgress"]({
-            draw: false,
-            questions: props.user.questionRawList
-          });
-        }}
       />
     </View>
   );

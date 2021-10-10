@@ -12,7 +12,9 @@
 }
 
 .title {
+  color: rgb(205, 55, 55);
   font-size: x-large;
+  font-weight: bold;
 }
 .campusCardGroup {
   display: flex;
@@ -52,8 +54,9 @@
   margin: 0 20px 0 20px;
 }
 .btn {
-  width: 250px;
   margin: 50px;
-  background-color: #a13f3f;
   color: white;
+  border-radius: 50px;
+  width: 233px;
+  background-color: rgb(205, 55, 55);
 }

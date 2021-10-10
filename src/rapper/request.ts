@@ -1,4 +1,4 @@
-/* md5: 4f925a7c29b659473792b55ed83bb15f */
+/* md5: 85c74751276bf01c0cea1853c3d5e102 */
 /* Rap仓库id: 290408 */
 /* Rapper版本: 1.2.2 */
 /* eslint-disable */
@@ -28,6 +28,9 @@ export interface IModels {
       success: boolean
       data: {
         token: string
+        lucky: boolean
+        openPrize: boolean
+        prizeInfo: string
       }
       errorCode: string
       errorMsg: string
@@ -107,6 +110,7 @@ export interface IModels {
           question_campus: string
           question_answer: string
           question_status: boolean
+          question_knowledge: string
         }[]
       }
     }
