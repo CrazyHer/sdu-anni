@@ -1,6 +1,6 @@
 import { View, Text, Image, ScrollView, RichText } from "@tarojs/components";
 import { inject, observer } from "mobx-react";
-import Taro from "@tarojs/taro";
+import Taro, { useShareAppMessage } from "@tarojs/taro";
 import { AtButton } from "taro-ui";
 import { FC, useEffect } from "react";
 import User from "../../mobxStore/user";
@@ -9,6 +9,11 @@ import Style from "./guide.module.css";
 import Images from "../../mobxStore/images";
 
 const Guide: FC<{ user: User; images: Images }> = props => {
+  useShareAppMessage(() => ({
+    title: "团橘奇遇记 快来与团橘一起云游山大，答题抽奖吧！",
+    path: "/pages/index/index",
+    imageUrl: props.images.imgsrcs.mainBackground
+  }));
   const onConfirm = () => {
     Taro.redirectTo({ url: "/pages/process/process" });
   };

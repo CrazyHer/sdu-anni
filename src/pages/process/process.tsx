@@ -7,7 +7,7 @@ import {
   AtModal,
   AtToast
 } from "taro-ui";
-import Taro from "@tarojs/taro";
+import Taro, { useShareAppMessage } from "@tarojs/taro";
 import { FC, useEffect, useState } from "react";
 import User from "../../mobxStore/user";
 import GoBackButton from "../../components/goBackButton/goBackButton";
@@ -17,6 +17,12 @@ import Images from "../../mobxStore/images";
 
 const ProcessPage: FC<{ user: User; images: Images }> = props => {
   const [loading, setLoading] = useState(false);
+
+  useShareAppMessage(() => ({
+    title: "团橘奇遇记 快来与团橘一起云游山大，答题抽奖吧！",
+    path: "/pages/index/index",
+    imageUrl: props.images.imgsrcs.mainBackground
+  }));
 
   useEffect(() => {
     setLoading(true);
@@ -131,10 +137,14 @@ const ProcessPage: FC<{ user: User; images: Images }> = props => {
 
       <View className={Style.processText}>
         <Text>{props.user.userInfo?.nickName}：</Text>
-        <Text>
-          您已点亮{props.user.finishedCampusNum.length}个校区，还差
-          {8 - props.user.finishedCampusNum.length}张即可分享卡片并参与抽奖
-        </Text>
+        {props.user.finishedCampusNum.length === 8 ? (
+          <Text>恭喜您已成功点亮所有校区！点击下方分享卡片即可参与抽奖</Text>
+        ) : (
+          <Text>
+            您已点亮{props.user.finishedCampusNum.length}个校区，还差
+            {8 - props.user.finishedCampusNum.length}张即可分享卡片并参与抽奖
+          </Text>
+        )}
       </View>
 
       {props.user.finishedCampusNum.length === 8 ? (
@@ -158,6 +168,7 @@ const ProcessPage: FC<{ user: User; images: Images }> = props => {
         isOpened={modalVisible}
         onClose={() => setModalVisible(false)}
         onConfirm={() => setModalVisible(false)}
+        confirmText="确认"
         title="活动已开奖"
         content={props.user.prizeInfo}
       />

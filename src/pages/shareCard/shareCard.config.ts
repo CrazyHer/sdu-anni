@@ -1,3 +1,4 @@
 export default {
-  navigationBarTitleText: "分享卡片"
+  navigationBarTitleText: "分享卡片",
+  enableShareAppMessage: true
 };

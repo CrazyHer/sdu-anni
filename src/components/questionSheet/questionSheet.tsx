@@ -2,7 +2,7 @@ import { View, Text } from "@tarojs/components";
 import { FC, useEffect, useState } from "react";
 import Taro from "@tarojs/taro";
 import { inject, observer } from "mobx-react";
-import { AtButton, AtModal, AtToast } from "taro-ui";
+import { AtButton, AtModal, AtModalContent, AtToast } from "taro-ui";
 import { fetch, Models } from "../../rapper";
 import Style from "./questionSheet.module.css";
 import User from "../../mobxStore/user";
@@ -102,8 +102,14 @@ const QuestionSheet: FC<{
         onCancel={() => setModalVisible(false)}
         onClose={() => setModalVisible(false)}
         cancelText="返回答题"
+        customStyle={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "flex-start",
+          flexDirection: "column",
+          padding: "10px"
+        }}
       />
-
       <View
         className={Style.questionPanel}
         style={{

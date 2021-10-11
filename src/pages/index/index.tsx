@@ -1,8 +1,8 @@
-import { View, Image, Text } from "@tarojs/components";
+import { View, Text } from "@tarojs/components";
 import { observer, inject } from "mobx-react";
 import { AtButton, AtToast } from "taro-ui";
 import { FC, useEffect, useState } from "react";
-import Taro from "@tarojs/taro";
+import Taro, { useShareAppMessage, useShareTimeline } from "@tarojs/taro";
 import { fetch } from "../../rapper/index";
 import Style from "./index.module.css";
 import User from "../../mobxStore/user";
@@ -10,6 +10,16 @@ import Images from "../../mobxStore/images";
 import PreloadImg from "../../components/preloadImg/preloadImg";
 
 const Index: FC<{ user: User; images: Images }> = props => {
+  useShareAppMessage(() => ({
+    title: "团橘奇遇记 快来与团橘一起云游山大，答题抽奖吧！",
+    path: "/pages/index/index",
+    imageUrl: props.images.imgsrcs.mainBackground
+  }));
+  useShareTimeline(() => ({
+    title: "团橘奇遇记 快来与团橘一起云游山大，答题抽奖吧！",
+    imageUrl: props.images.imgsrcs.mainBackground
+  }));
+
   const [loading, setLoading] = useState(false);
   const navigateTo = () => {
     if (props.user.guildConfirm) {
@@ -22,7 +32,7 @@ const Index: FC<{ user: User; images: Images }> = props => {
   const getUserInfo = async () => {
     if (!props.user.userInfo) {
       const userInfoRes = await Taro.getUserProfile({
-        desc: "制作获奖卡片并记录中奖身份信息"
+        desc: "制作分享卡片并记录中奖身份信息"
       });
       props.user.setUserInfo(userInfoRes.userInfo);
     }

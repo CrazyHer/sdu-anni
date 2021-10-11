@@ -1,3 +1,4 @@
+import Taro from "@tarojs/taro";
 import { Component } from "react";
 import { Provider } from "mobx-react";
 import "taro-ui/dist/style/index.scss";

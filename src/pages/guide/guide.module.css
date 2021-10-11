@@ -12,7 +12,7 @@
 }
 .title {
   color: rgb(205, 55, 55);
-  font-size: x-large;
+  font-size: larger;
   font-weight: bold;
 }
 .rulesContent {
@@ -28,8 +28,11 @@
   border-radius: 20px;
   border: 1px solid rgba(0, 0, 0, 0.05);
   margin: 28px;
+  font-size: small;
 }
-
+.rulesContent Text {
+  margin-bottom: 20px;
+}
 .rulesContent .textB {
   font-weight: bold;
 }

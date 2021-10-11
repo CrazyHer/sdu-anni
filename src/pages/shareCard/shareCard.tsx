@@ -9,7 +9,11 @@ import {
   AtTextarea,
   AtToast
 } from "taro-ui";
-import Taro, { useRouter } from "@tarojs/taro";
+import Taro, {
+  useRouter,
+  useShareAppMessage,
+  useShareTimeline
+} from "@tarojs/taro";
 import Images from "../../mobxStore/images";
 import GoBackButton from "../../components/goBackButton/goBackButton";
 import User from "../../mobxStore/user";
@@ -41,9 +45,9 @@ const ShareCard: FC<{ user: User; images: Images }> = props => {
           draw: true,
           questions: props.user.questionRawList
         });
-        Taro.atMessage({
-          message: "保存成功，请关注抽奖结果",
-          type: "success"
+        Taro.showModal({
+          content: "保存并参与抽奖成功，请关注抽奖结果！",
+          showCancel: false
         });
         // 已参与过抽奖
       } else {
@@ -56,7 +60,10 @@ const ShareCard: FC<{ user: User; images: Images }> = props => {
           filePath: imgInfo.path
         });
 
-        Taro.atMessage({ message: "保存成功", type: "success" });
+        Taro.showModal({
+          content: "保存成功，您已参与抽奖",
+          showCancel: false
+        });
       }
     } catch (error) {
       Taro.atMessage({ message: "保存失败", type: "error" });
@@ -69,6 +76,12 @@ const ShareCard: FC<{ user: User; images: Images }> = props => {
   const [originImgSrc, setOriginImgSrc] = useState("");
   const [imgSrc, setImgSrc] = useState("");
   const [imgInfo, setImgInfo] = useState({ width: 0, height: 0 });
+
+  useShareAppMessage(res => ({
+    title: "团橘奇遇记 快来与团橘一起云游山大，答题抽奖吧！",
+    path: "/pages/index/index",
+    imageUrl: imgSrc
+  }));
 
   // 初始化，获得原始图片的大小信息，并设置背景
   useEffect(() => {
@@ -84,7 +97,7 @@ const ShareCard: FC<{ user: User; images: Images }> = props => {
       })
       .catch(console.error)
       .finally(() => setLoading(false));
-  }, [props.images.imgsrcs, router.params.card]);
+  }, []);
 
   const handleGeneratePic = async () => {
     // 根据不同校区确定文字定位
@@ -108,16 +121,16 @@ const ShareCard: FC<{ user: User; images: Images }> = props => {
 
         ctx.fillStyle = textConfig.nameColor;
         ctx.setFontSize(textConfig.nameSize);
-        ctx.font = `bolder ${textConfig.nameSize}px`;
+        ctx.font = `bold ${textConfig.nameSize}px sans-serif`;
         ctx.fillText(
-          props.user.userInfo?.nickName || "",
+          `${props.user.userInfo?.nickName}：`,
           textConfig.nameX,
           textConfig.nameY
         );
 
         ctx.fillStyle = textConfig.blessTextColor;
         ctx.setFontSize(textConfig.blessTextSize);
-        ctx.font = `${textConfig.blessTextSize}px bold`;
+        ctx.font = `${textConfig.blessTextSize}px sans-serif`;
         ctx.fillText(blessText, textConfig.blessTextX, textConfig.blessTextY);
         ctx.draw(true, () => resolve());
       });

@@ -1,5 +1,7 @@
 export default {
   navigationBarTitleText: "首页",
   navigationStyle: "custom",
-  navigationBarTextStyle: "black"
+  navigationBarTextStyle: "black",
+  enableShareAppMessage: true,
+  enableShareTimeline: true
 };

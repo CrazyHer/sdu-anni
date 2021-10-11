@@ -2,3 +2,8 @@ body {
   margin: 0 auto;
   border: 0;
 }
+/* 使文字对齐 */
+Text {
+  text-align: justify;
+  display: inline-block;
+}
