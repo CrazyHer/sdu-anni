@@ -1,6 +1,6 @@
 import Taro from "@tarojs/taro";
 import { View } from "@tarojs/components";
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import GoBackButton from "./../../../components/goBackButton/goBackButton";
 import Style from "./qingdao.module.css";
@@ -8,6 +8,14 @@ import User from "../../../mobxStore/user";
 import Images from "../../../mobxStore/images";
 
 const Qingdao: FC<{ user: User; images: Images }> = props => {
+  useEffect(() => {
+    Taro.showToast({
+      title: "点击界面任意处即可答题",
+      duration: 1000,
+      icon: "none"
+    });
+  }, []);
+
   return (
     <View>
       <View

@@ -9,11 +9,7 @@ import {
   AtTextarea,
   AtToast
 } from "taro-ui";
-import Taro, {
-  useRouter,
-  useShareAppMessage,
-  useShareTimeline
-} from "@tarojs/taro";
+import Taro, { useRouter, useShareAppMessage } from "@tarojs/taro";
 import Images from "../../mobxStore/images";
 import GoBackButton from "../../components/goBackButton/goBackButton";
 import User from "../../mobxStore/user";
@@ -77,8 +73,8 @@ const ShareCard: FC<{ user: User; images: Images }> = props => {
   const [imgSrc, setImgSrc] = useState("");
   const [imgInfo, setImgInfo] = useState({ width: 0, height: 0 });
 
-  useShareAppMessage(res => ({
-    title: "团橘奇遇记 快来与团橘一起云游山大，答题抽奖吧！",
+  useShareAppMessage(() => ({
+    title: "快来与团橘一起云游山大，答题抽奖吧！",
     path: "/pages/index/index",
     imageUrl: imgSrc
   }));
@@ -121,7 +117,7 @@ const ShareCard: FC<{ user: User; images: Images }> = props => {
 
         ctx.fillStyle = textConfig.nameColor;
         ctx.setFontSize(textConfig.nameSize);
-        ctx.font = `bold ${textConfig.nameSize}px sans-serif`;
+        ctx.font = `normal ${textConfig.nameSize}px Arial,sans-serif`;
         ctx.fillText(
           `${props.user.userInfo?.nickName}：`,
           textConfig.nameX,
@@ -130,7 +126,7 @@ const ShareCard: FC<{ user: User; images: Images }> = props => {
 
         ctx.fillStyle = textConfig.blessTextColor;
         ctx.setFontSize(textConfig.blessTextSize);
-        ctx.font = `${textConfig.blessTextSize}px sans-serif`;
+        ctx.font = `normal bold ${textConfig.blessTextSize}px Arial,sans-serif`;
         ctx.fillText(blessText, textConfig.blessTextX, textConfig.blessTextY);
         ctx.draw(true, () => resolve());
       });

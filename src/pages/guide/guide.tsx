@@ -10,7 +10,7 @@ import Images from "../../mobxStore/images";
 
 const Guide: FC<{ user: User; images: Images }> = props => {
   useShareAppMessage(() => ({
-    title: "团橘奇遇记 快来与团橘一起云游山大，答题抽奖吧！",
+    title: "快来与团橘一起云游山大，答题抽奖吧！",
     path: "/pages/index/index",
     imageUrl: props.images.imgsrcs.mainBackground
   }));
@@ -52,7 +52,7 @@ const Guide: FC<{ user: User; images: Images }> = props => {
           </Text>
           <Text className={Style.textB}>3.分享卡片，参加抽奖</Text>
           <Text>
-            八大校区全部点亮，便可在进度界面任选一个校区，生成卡片并分享到朋友圈，即可参加抽奖！抽奖结果将在活动后推文公布，兑奖时需提供朋友圈分享截图。
+            八大校区全部点亮，便可在进度界面任选一个校区，生成卡片并分享到朋友圈，即可参加抽奖！
           </Text>
         </View>
       </ScrollView>

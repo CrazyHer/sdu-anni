@@ -1,4 +1,4 @@
-/* md5: 85c74751276bf01c0cea1853c3d5e102 */
+/* md5: 42d76c4434c5cb622bc58f2ced4a732e */
 /* Rap仓库id: 290408 */
 /* Rapper版本: 1.2.2 */
 /* eslint-disable */
@@ -23,6 +23,7 @@ export interface IModels {
        * wx.login res返回code
        */
       code: string
+      username: string
     }
     Res: {
       success: boolean

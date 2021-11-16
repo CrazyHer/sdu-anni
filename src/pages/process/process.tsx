@@ -19,7 +19,7 @@ const ProcessPage: FC<{ user: User; images: Images }> = props => {
   const [loading, setLoading] = useState(false);
 
   useShareAppMessage(() => ({
-    title: "团橘奇遇记 快来与团橘一起云游山大，答题抽奖吧！",
+    title: "快来与团橘一起云游山大，答题抽奖吧！",
     path: "/pages/index/index",
     imageUrl: props.images.imgsrcs.mainBackground
   }));

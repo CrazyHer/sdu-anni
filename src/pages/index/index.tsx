@@ -11,12 +11,12 @@ import PreloadImg from "../../components/preloadImg/preloadImg";
 
 const Index: FC<{ user: User; images: Images }> = props => {
   useShareAppMessage(() => ({
-    title: "团橘奇遇记 快来与团橘一起云游山大，答题抽奖吧！",
+    title: "快来与团橘一起云游山大，答题抽奖吧！",
     path: "/pages/index/index",
     imageUrl: props.images.imgsrcs.mainBackground
   }));
   useShareTimeline(() => ({
-    title: "团橘奇遇记 快来与团橘一起云游山大，答题抽奖吧！",
+    title: "快来与团橘一起云游山大，答题抽奖吧！",
     imageUrl: props.images.imgsrcs.mainBackground
   }));
 
@@ -44,7 +44,10 @@ const Index: FC<{ user: User; images: Images }> = props => {
       // 获取用户数据并登录
       await getUserInfo();
       const loginRes = await Taro.login();
-      const res = await fetch["POST/login"]({ code: loginRes.code });
+      const res = await fetch["POST/login"]({
+        code: loginRes.code,
+        username: props.user.userInfo?.nickName || ""
+      });
       if (res.success) {
         props.user.setToken(res.data.token);
         props.user.setPrizeState(
